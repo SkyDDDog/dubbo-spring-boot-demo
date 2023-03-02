@@ -13,8 +13,7 @@ dubbo:
   config-center:
     timeout: 250000
 
-zookeeper:
-  address: 1.12.66.67
+
 
 server:
   port: 8081
