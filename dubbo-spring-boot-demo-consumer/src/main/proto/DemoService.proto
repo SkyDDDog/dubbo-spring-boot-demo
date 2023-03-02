@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package proto;
+
+option java_multiple_files = true;
+option java_package = "com.west2.provider.service.proto";
+option java_outer_classname = "UserServiceProto";
+option objc_class_prefix = "DEMOSRV";
+
+message demoRequest {
+  string name = 1;
+}
+
+message demoResponse {
+  string hello = 2;
+}
+
+service demoService {
+  rpc sayHello(demoRequest) returns(demoResponse);
+}

@@ -1,0 +1,3 @@
+# Project exclude paths
+/dubbo-spring-boot-demo-consumer/target/
+/dubbo-spring-boot-demo-provider/target/

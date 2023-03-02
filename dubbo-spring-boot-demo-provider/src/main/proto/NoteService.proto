@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package proto;
+
+option java_multiple_files = true;
+option java_package = "com.west2.provider.service.proto";
+option java_outer_classname = "NoteServiceProto";
+option objc_class_prefix = "DEMOSRV";
+
+message NoteModel {
+  string id = 1;
+  string content = 2;
+}
+
+message NoteRequest {
+  string content = 1;
+  bool newRecord = 2;
+}
+
+message NoteResponse {
+  NoteModel note = 1;
+}
+
+message NoteListResponse {
+  repeated NoteModel noteList = 1;
+}
+
+
+service NoteService {
+  rpc saveNote(NoteRequest) returns(NoteResponse);
+  rpc noteList(NoteRequest) returns(NoteListResponse);
+}
