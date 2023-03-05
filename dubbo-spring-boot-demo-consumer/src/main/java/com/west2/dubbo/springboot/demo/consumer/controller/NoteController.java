@@ -2,15 +2,15 @@ package com.west2.dubbo.springboot.demo.consumer.controller;
 
 import com.west2.dubbo.springboot.demo.consumer.common.CommonResult;
 import com.west2.dubbo.springboot.demo.consumer.entity.vo.NoteVO;
-import com.west2.provider.service.proto.NoteListResponse;
-import com.west2.provider.service.proto.NoteRequest;
-import com.west2.provider.service.proto.NoteResponse;
-import com.west2.provider.service.proto.NoteService;
+import com.west2.dubbo.springboot.demo.consumer.util.NoteModelUtil;
+import com.west2.provider.service.proto.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @CrossOrigin("*")
@@ -32,7 +32,8 @@ public class NoteController {
                 setNewRecord(true).
                 build();
         NoteResponse resp = noteService.saveNote(req);
-        result.success("note", resp.getNote());
+        NoteModel note = resp.getNote();
+        result.success("note", note.getContent());
 
         return (CommonResult) result.end();
     }
@@ -43,7 +44,9 @@ public class NoteController {
         CommonResult result = new CommonResult().init();
 
         NoteListResponse resp = noteService.noteList(NoteRequest.newBuilder().build());
-        result.success("note", resp.getNoteListList());
+        List<NoteModel> noteListList = resp.getNoteListList();
+        List<NoteVO> note = NoteModelUtil.buildVOList(noteListList);
+        result.success("note", note);
 
         return (CommonResult) result.end();
     }

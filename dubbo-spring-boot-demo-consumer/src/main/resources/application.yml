@@ -14,7 +14,8 @@ dubbo:
   config-center:
     timeout: 250000
 
-
+zookeeper:
+  address: 1.12.66.67
 
 
 server:
@@ -23,3 +24,4 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher # 解决springboot和swagger2版本冲突
+

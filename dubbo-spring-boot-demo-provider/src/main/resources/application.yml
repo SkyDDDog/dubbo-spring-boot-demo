@@ -13,12 +13,15 @@ dubbo:
   config-center:
     timeout: 250000
 
-
+zookeeper:
+  address: 1.12.66.67
 
 server:
   port: 8081
 
 spring:
+  main:
+    web-application-type: none
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     host: 127.0.0.1
@@ -26,3 +29,7 @@ spring:
     url: jdbc:mysql://${spring.datasource.host}:3306/${spring.datasource.db}?serverTimezone=GMT%2b8
     username: root
     password: 9738faq
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

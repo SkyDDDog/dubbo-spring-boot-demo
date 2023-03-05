@@ -4,14 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.west2.dubbo.springboot.demo.provider.entity.db.Note;
 import com.west2.dubbo.springboot.demo.provider.service.db.DbNoteService;
 import com.west2.provider.service.proto.*;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+@DubboService
 @Service
 public class NoteServiceImpl implements NoteService {
 
@@ -50,8 +51,10 @@ public class NoteServiceImpl implements NoteService {
     public NoteListResponse noteList(NoteRequest request) {
         List<Note> list = noteService.findList(new QueryWrapper<>());
         NoteListResponse.Builder builder = NoteListResponse.newBuilder();
+
         for (int i = 0; i < list.size(); i++) {
-            builder.setNoteList(i, buildModel(list.get(i)));
+//            builder.setNoteList(i, );
+            builder.addNoteList(buildModel(list.get(i)));
         }
 
         return builder.build();
